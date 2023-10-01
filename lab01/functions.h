@@ -23,5 +23,6 @@ int countWords(const string &text);
 string code(string text);
 string capitalizeWords(string text);
 void fel2(int argc, char *argv[]);
+int extra();
 
 #endif //LAB01_FUNCTIONS_H
