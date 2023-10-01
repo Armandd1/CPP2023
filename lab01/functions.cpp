@@ -48,6 +48,10 @@ pair<double, double> max2(double array[], int numElements) {
 
     pair<double, double> answer = {NAN, NAN};
 
+    if (numElements < 1) {
+        return answer;
+    }
+
     if (numElements < 2) {
         answer.first = array[0];
     } else {
@@ -74,6 +78,17 @@ pair<double, double> max2(double array[], int numElements) {
     return answer;
 }
 
+double sumNumbersInArguments(int argc, char *argv[]) {
+    double sum = 0.0;
+
+    for (int i = 1; i < argc; i++) {
+        double num = atof(argv[i]);
+        sum += num;
+    }
+
+    return sum;
+}
+
 int countWords(const string &text) {
     istringstream myStream(text);
     int counter = 0;
@@ -82,40 +97,38 @@ int countWords(const string &text) {
         counter++;
     }
     return counter;
-
 }
 
 string code(string text) {
     for (int i = 0; i < text.size(); i++) {
-        if (text[i] >= 97 && text[i] < 122) {
+        if (text[i] >= 'a' && text[i] <= 'z') {
             text[i] += 1;
+            if (text[i] == 'z' + 1) {
+                text[i] = 'a';
+            }
         }
-        if (text[i] >= 65 && text[i] < 90) {
+
+        if (text[i] >= 'A' && text[i] <= 'Z') {
             text[i] += 1;
-        }
-        if (text[i] == 122) {
-            text[i] = 97;
-        }
-        if (text[i] == 90) {
-            text[i] = 65;
+            if (text[i] == 'Z' + 1) {
+                text[i] = 'A';
+            }
         }
     }
     return text;
 }
 
 string capitalizeWords(string text) {
-
-    if (text.at(0) >= 'a' && text.at(0) <= 'z')
-        text[0] -= 32;
-
-    int pos = text.find(' ') + 1;
-
-    for (int i = 1; i < text.size(); i++) {
-        if (text[i] >= 'A' && text[i] <= 'Z')
-            text[i] += 32;
+    for (int i = 0; i < text.size(); i++) {
+        if (i == 0 || text[i - 1] == ' ') {
+            if (text[i] >= 'a' && text[i] <= 'z') {
+                text[i] -= 32;
+            }
+        } else {
+            if (text[i] >= 'A' && text[i] <= 'Z') {
+                text[i] += 32;
+            }
+        }
     }
-
-    if (text.at(pos) >= 'a' && text.at(pos) <= 'z')
-        text[pos] -= 32;
     return text;
 }

@@ -1,9 +1,9 @@
 #include "functions.h"
 
 
-int main() {
+int main(int argc, char *argv[]) {
     fel1();
-    fel2();
+    fel2(argc, argv);
     return 0;
 }
 
@@ -29,10 +29,18 @@ void fel1() {
         cout << "array[" << i << "]=";
         cin >> array[i];
     }
-    cout << "Mean:" << mean(array, n);
+    cout << "Mean:" << mean(array, n)<<endl;
+    cout << "Szoras:" << stddev(array, n)<<endl;
+    pair<double, double> result = max2(array, n);
+    cout << "Az elso legnagyobb elem: " << result.first << endl;
+    cout << "A masodik legnagyobb elem: " << result.second << endl;
 }
 
-void fel2() {
+void fel2(int argc, char *argv[]) {
+
+    double result = sumNumbersInArguments(argc, argv);
+    cout << "Az összeg: " << result << endl;
+
     istringstream iss("1 2 3 alma 4");
     double number;
     while (iss >> number) {
