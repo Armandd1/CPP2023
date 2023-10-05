@@ -31,7 +31,6 @@ int main(int argc, char **argv) {
 //    for (int i = 0; i < N; ++i) {
 //        cout << "Pont " << i + 1 << ": (" << points[i].getX() << ", " << points[i].getY() << ")" << endl;
 //    }
-
 //    printArray(points, N);
 
     pair<Point, Point> closestPair = closestPoints(points, N);
