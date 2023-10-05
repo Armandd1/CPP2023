@@ -3,8 +3,8 @@
 
 int main(int argc, char *argv[]) {
 //    fel1();
-//    fel2(argc, argv);
-    extra();
+    fel2(argc, argv);
+//    extra();
     return 0;
 }
 
@@ -40,7 +40,7 @@ void fel1() {
 void fel2(int argc, char *argv[]) {
 
     double result = sumNumbersInArguments(argc, argv);
-    cout << "Az összeg: " << result << endl;
+    cout << "Az osszeg: " << result << endl;
 
     istringstream iss("1 2 3 alma 4");
     double number;
