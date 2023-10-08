@@ -7,6 +7,7 @@
 #include <random>
 #include "Point.h"
 
+
 Point::Point(int x, int y) {
     if (x >= 0 && x <= 2000 && y >= 0 && y <= 2000) {
         this->x = x;
