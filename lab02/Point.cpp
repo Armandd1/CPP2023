@@ -102,75 +102,74 @@ pair<Point, Point> closestPoints(Point *points, int numPoints) {
         throw invalid_argument("Legalabb ket pont szukseges.");
     }
 
+    sortPoints(points, numPoints);
+
     double minDistance = numeric_limits<double>::max();
     pair<Point, Point> closestPair;
 
     for (int i = 0; i < numPoints - 1; ++i) {
-        for (int j = i + 1; j < numPoints; ++j) {
-            double dist = distance(points[i], points[j]);
+            double dist = distance(points[i], points[i+1]);
             if (dist < minDistance) {
                 minDistance = dist;
-                closestPair = make_pair(points[i], points[j]);
+                closestPair = make_pair(points[i], points[i+1]);
             }
         }
-    }
 
     return closestPair;
 }
 
-pair<Point, Point> farthestPoints(Point* points, int numPoints) {
+pair<Point, Point> farthestPoints(Point *points, int numPoints) {
     if (numPoints < 2) {
         throw invalid_argument("Legalabb ket pont szukseges.");
     }
+
+    sortPoints(points, numPoints);
 
     double maxDistance = 0.0;
     pair<Point, Point> farthestPair;
 
     for (int i = 0; i < numPoints - 1; ++i) {
-        for (int j = i + 1; j < numPoints; ++j) {
-            double dist = distance(points[i], points[j]);
-            if (dist > maxDistance) {
-                maxDistance = dist;
-                farthestPair = make_pair(points[i], points[j]);
-            }
+        double dist = distance(points[i], points[i+1]);
+        if (dist > maxDistance) {
+            maxDistance = dist;
+            farthestPair = make_pair(points[i], points[i+1]);
         }
     }
-
     return farthestPair;
 }
 
-bool comparePoints(const Point& a, const Point& b) {
+bool comparePoints(const Point &a, const Point &b) {
     return a.getX() < b.getX();
 }
 
-void sortPoints(Point* points, int numPoints) {
+void sortPoints(Point *points, int numPoints) {
     sort(points, points + numPoints, comparePoints);
 //    for (int i = 0; i < numPoints; ++i) {
 //        points[i].print();
 //    }
 }
 
-bool compareByDistance(const Point& a, const Point& b) {
+bool compareByDistance(const Point &a, const Point &b) {
     double distA = sqrt(a.getX() * a.getX() + a.getY() * a.getY());
     double distB = sqrt(b.getX() * b.getX() + b.getY() * b.getY());
     return distA > distB;
 }
 
-Point* farthestPointsFromOrigin(Point* points, int numPoints) {
+Point *farthestPointsFromOrigin(Point *points, int numPoints) {
     if (numPoints <= 10) {
-        Point* result = new Point[numPoints];
+        Point *result = new Point[numPoints];
         copy(points, points + numPoints, result);
         return result;
     }
 
     sort(points, points + numPoints, compareByDistance);
 
-    Point* result = new Point[10];
+    Point *result = new Point[10];
     copy(points, points + 10, result);
 
     return result;
 }
 
-void deletePoints(Point* points) {
+void deletePoints(Point *points) {
     delete[] points;
 }
