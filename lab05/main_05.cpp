@@ -5,6 +5,7 @@
 #include <Windows.h>
 #endif /* _WIN32 */
 
+
 int main() {
     // Ékezetek kiírása Windows alatt
 #ifdef _WIN32

@@ -37,6 +37,7 @@ void QuizGame::playQuiz(Quiz quiz) const {
             }
         }
 
+
         // A játékos által megadott válaszokat is
         // hasonlóan bitenként tároljuk el
         while (sstream >> answer) {

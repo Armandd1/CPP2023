@@ -8,4 +8,5 @@ public:
     void playQuiz(Quiz quiz) const;
 };
 
+
 #endif /* QUIZGAME_H */

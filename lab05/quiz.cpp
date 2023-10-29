@@ -42,6 +42,7 @@ void Quiz::setName(string nev) {
     name = nev;
 }
 
+
 void Question::print() {
     cout<< "Question: " << text << endl;
 }
