@@ -1,5 +1,5 @@
 //
-// Created by arman on 2023. 10. 16..
+// Created by arman on 2023. 10. 16.
 //
 
 #ifndef LAB3_LIST_H
