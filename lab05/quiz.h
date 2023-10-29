@@ -15,20 +15,22 @@ class Answer{
 public:
     string getText();
     bool isCorrect();
+    Answer(const string &text = 0);
+    bool correct;
 private:
     string text;
-    bool correct;
 };
 
 class Question{
 public:
+    Question(const string &text);
     void addAnswer(Answer answer);
     string getText();
     vector<Answer> getAnswers();
     void print();
+    vector<Answer> answers;
 private:
     string text;
-    vector<Answer> answers;
 };
 
 

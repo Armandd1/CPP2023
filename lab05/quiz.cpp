@@ -5,6 +5,7 @@
 #include "quiz.h"
 
 #include <iostream>
+#include <sstream>
 
 string Answer::getText() {
     return text;
@@ -44,11 +45,46 @@ void Quiz::setName(string nev) {
 
 
 void Question::print() {
-    cout<< "Question: " << text << endl;
+    cout << text << endl;
+    for (int i = 0; i < answers.size(); ++i) {
+        cout << i + 1 << ". " << answers.at(i).getText() << endl;
+    }
 }
 
-void Quiz::readFromFile(std::string nev) {
+void Quiz::readFromFile(std::string filename) {
+    ifstream mystream(filename);
+    string line;
+    while (getline(mystream,line)) {
+        if(line.at(0) == 'Q') {
 
+            Question question(line.substr(2));
+
+            while(getline(mystream,line)) {
+                if(line.at(0) != 'A') {
+                    istringstream numbers(line);
+                    int number;
+                    while(numbers >> number) {
+                        question.answers.at(number-1).correct = true;
+                    }
+                    break;
+                }
+                else {
+                    Answer answer(line.substr(2));
+                    question.answers.push_back(answer);
+                }
+            }
+
+            this->questions.push_back(question);
+        }
+    }
+}
+
+Question::Question(const string &text) {
+    this->text = text;
+}
+
+Answer::Answer(const string &text) {
+    this->text = text;
 }
 
 
