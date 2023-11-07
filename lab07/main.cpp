@@ -1,4 +1,5 @@
 #include "quizgame.h"
+#include <iostream>
 
 // Ékezetek kiírása Windows alatt
 //#ifdef _WIN32
@@ -6,14 +7,18 @@
 //#endif /* _WIN32 */
 
 
+using namespace std;
+
 int main() {
-//    // Ékezetek kiírása Windows alatt
-//#ifdef _WIN32
+    // Ékezetek kiírása Windows alatt
+//    #ifdef _WIN32
 //    SetConsoleOutputCP(CP_UTF8);
-//#endif /* _WIN32 */
+//    #endif /* _WIN32 */
+
+
 
     Quiz quiz;
-    quiz.setName("Teszt kviz");
+    quiz.setName("Teszt_kviz");
     quiz.readFromFile("kviz.txt");
 
     QuizGame game;
