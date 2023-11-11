@@ -1,26 +1,20 @@
-#include "quizgame.h"
-#include <iostream>
+#include "Quiz.h"
+#include "QuizGame.h"
 
-// Ékezetek kiírása Windows alatt
 //#ifdef _WIN32
 //#include <Windows.h>
 //#endif /* _WIN32 */
 
-
-using namespace std;
-
 int main() {
-    // Ékezetek kiírása Windows alatt
-//    #ifdef _WIN32
+
+//#ifdef _WIN32
 //    SetConsoleOutputCP(CP_UTF8);
-//    #endif /* _WIN32 */
+//#endif /* _WIN32 */
 
-
-
-    Quiz quiz;
-    quiz.setName("Teszt_kviz");
+    Quiz quiz("quiz");
     quiz.readFromFile("kviz.txt");
-
     QuizGame game;
     game.playQuiz(quiz);
+
+    return 0;
 }

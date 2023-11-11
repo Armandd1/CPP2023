@@ -4,49 +4,58 @@
 
 #ifndef LAB5_QUIZ_H
 #define LAB5_QUIZ_H
-using namespace std;
+
 #include <string>
 #include <vector>
-#include <fstream>
+
+#include <utility>
 #include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include <sstream>
 
+using namespace std;
 
-class Answer{
+class Answer {
 public:
-    string getText();
+    string name;
+    bool logicalValue;
+
+    Answer(string answer = NULL);
+
     bool isCorrect();
-    Answer(const string &text = 0);
-    bool correct;
-private:
-    string text;
 };
 
-class Question{
+class Question {
 public:
-    Question(const string &text);
-    void addAnswer(Answer answer);
-    string getText();
-    vector<Answer> getAnswers();
-    void print();
+    string question;
     vector<Answer> answers;
-private:
-    string text;
+
+    Question(string question = NULL);
+
+    void print();
+
+    vector<Answer> getAnswers();
 };
 
-
-class Quiz{
+class Quiz {
 public:
-    void addQuestion(Question question);
-    string getName();
-    vector<Question> getQuestions();
-
-    void setName(string nev);
-
-    void readFromFile(string nev);
-
-private:
     string name;
     vector<Question> questions;
+public:
+    Quiz(string name = NULL);
+
+    void setname(string name);
+
+    void readFromFile(string filename);
+
+    string getName();
+
+    vector<Question> getQuestions();
+
+    void setName(string);
+
 };
 
 #endif //LAB5_QUIZ_H

@@ -1,26 +1,15 @@
-//
-// Created by arman on 2023. 11. 07..
-//
-
-#include "quizgame.h"
+#include "Quiz.h"
+#include "Quizgame.h"
 #include <sstream>
-#include <iostream>
-
-using namespace std;
 
 void QuizGame::playQuiz(Quiz quiz) const {
     // Bevezető
     std::cout << "Welcome to the Quiz Game!" << std::endl;
     std::cout << "You are now playing: " << quiz.getName() << std::endl;
-    std::cout << "Every line must be end with '|'\n"
-                 "If there is more possible answer please separate the answers with '|'\n"
-                 "ex: answer 1 | answer 2 |\n"
-                 "Warning!!! if you miss a '|', then the outcome will be incorrect\n" << std::endl;
 
     // Jelenleg beolvasott sor és válasz
     std::string line;
     int answer;
-    string str;
 
     // Jelenlegi pontszám
     int score = 0;
@@ -40,7 +29,6 @@ void QuizGame::playQuiz(Quiz quiz) const {
         std::vector<Answer> answers = question.getAnswers();
         int correctAnswer = 0;
         int currentAnswer = 0;
-        string currentAnswerString;
 
         // A helyes válaszokat bitenként tároljuk el
         for (int i = 0; i < answers.size(); ++i) {
@@ -51,22 +39,9 @@ void QuizGame::playQuiz(Quiz quiz) const {
 
         // A játékos által megadott válaszokat is
         // hasonlóan bitenként tároljuk el
-        while (sstream >> str) {
+        while (sstream >> answer) {
             // A válaszok 1-től kezdődnek, de a bitenkénti tárolás 0-tól
-
-            if(str != "|"){
-                if(!currentAnswerString.empty()) currentAnswerString.append(" ");
-                currentAnswerString.append(str);
-            } else {
-                answer = question.getNumberFromString(currentAnswerString);
-                if(answer == -1){
-                    continue;
-                }
-                currentAnswer |= (1 << answer);
-                currentAnswerString.clear();
-            }
-
-
+            currentAnswer |= (1 << (answer - 1));
         }
 
         // Összehasonlítjuk a két választ és kiírjuk az eredményt

@@ -1,97 +1,69 @@
-//
-// Created by arman on 2023. 11. 07..
-//
-
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include "quiz.h"
-
-Quiz::Quiz(string name, vector<Question> questions) {
-    this->name = name;
-    this->questions = questions;
+#include "Quiz.h"
+Answer::Answer(string answer) {
+    this->name = answer;
+    this->logicalValue = false;
 }
 
-Quiz::Quiz() {
-    name = "";
-    questions = {};
+Question::Question(string question) {
+    this->question = question;
 }
 
-void Quiz::setName(string name) {
+Quiz::Quiz(std::string name) {
     this->name = name;
 }
 
-void Quiz::readFromFile(string filename) {
-    /*
-    ifstream file(filename);
+void Quiz::setname(std::string name) {
+    this->name = name;
+}
+
+void Quiz::readFromFile(std::string filename) {
+    ifstream mystream(filename);
     string line;
-    vector<Answer> answers;
-    string questionText;
-    while(getline(file, line)) {
-        char first = line[0];
-        if (first == 'Q') {
-            questionText = line.substr(2);
-            answers.clear();
-        } else {
-            if(first == 'A') {
-                string answerText = line.substr(2);
-                answers.push_back(Answer(answerText));
-            } else {
-                int answerNumber = 0;
-                for (char character : line) {
-                    if (character != ' ') {
-                        answerNumber = character - '0';
+    while (getline(mystream,line)) {
+        if(line.at(0) == 'Q') {
+
+            Question question(line.substr(2));
+
+            while(getline(mystream,line)) {
+                if(line.at(0) != 'A') {
+                    istringstream numbers(line);
+                    int number;
+                    while(numbers >> number) {
+                        question.answers.at(number-1).logicalValue = true;
                     }
-                    if (answerNumber < answers.size()) {
-                        answers[answerNumber].setCorrect(answerNumber == 1);
-                    }
+                    break;
+                }
+                else {
+                    Answer answer(line.substr(2));
+                    question.answers.push_back(answer);
                 }
             }
-        }
-        Question question(questionText, answers);
-    }
-     */
 
-    ifstream file(filename);
-    if (!file.is_open()) {
-        std::cerr << "Failed to open the file." << std::endl;
-        exit(-1);
-    }
-    string line;
-    vector<Answer> answers;
-    string question;
-    string answerstring;
-    while(getline(file, line)){
-        char first = line[0];
-//        cout << line << " " << first << endl;
-        if(first == 'Q'){
-            answers.clear();
-            question = line.substr(2);
-        } else {
-            if (first == 'A') {
-                answerstring = line.substr(2);
-                Answer answer1(answerstring);
-                answers.push_back(answer1);
-            }
-            else {
-                istringstream iss(line);
-                string token;
-                int nb;
-                while(getline(iss, token, ' ')){
-                    nb = stoi(token);
-                    answers[nb - 1].setCorrect(true);
-                }
-                this->questions.push_back(Question(question, answers));
-            }
+            this->questions.push_back(question);
         }
     }
-
 }
 
 string Quiz::getName() {
-    return name;
+    return this->name;
 }
 
 vector<Question> Quiz::getQuestions() {
     return this->questions;
+}
+
+void Question::print() {
+    cout<<this->question<<endl;
+    cout<<"1. "<<this->answers.at(0).name<<endl;
+    cout<<"2. "<<this->answers.at(1).name<<endl;
+    cout<<"3. "<<this->answers.at(2).name<<endl;
+    cout<<"4. "<<this->answers.at(3).name<<endl;
+}
+
+vector<Answer> Question::getAnswers() {
+    return this->answers;
+}
+
+bool Answer::isCorrect() {
+    return this->logicalValue;
 }

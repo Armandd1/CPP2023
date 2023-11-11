@@ -1,54 +1,19 @@
-//
-// Created by arman on 2023. 10. 23.
-//
-
-#include "quiz.h"
-
-#include <iostream>
-#include <sstream>
-
-string Answer::getText() {
-    return text;
+#include "Quiz.h"
+Answer::Answer(string answer) {
+    this->name = answer;
+    this->logicalValue = false;
 }
 
-bool Answer::isCorrect() {
-    return correct;
+Question::Question(string question) {
+    this->question = question;
 }
 
-void Question::addAnswer(Answer answer) {
-    answers.push_back(answer);
+Quiz::Quiz(std::string name) {
+    this->name = name;
 }
 
-string Question::getText() {
-    return text;
-}
-
-vector<Answer> Question::getAnswers() {
-    return answers;
-}
-
-void Quiz::addQuestion(Question question) {
-    questions.push_back(question);
-}
-
-string Quiz::getName() {
-    return name;
-}
-
-vector<Question> Quiz::getQuestions() {
-    return questions;
-}
-
-void Quiz::setName(string nev) {
-    name = nev;
-}
-
-
-void Question::print() {
-    cout << text << endl;
-    for (int i = 0; i < answers.size(); ++i) {
-        cout << i + 1 << ". " << answers.at(i).getText() << endl;
-    }
+void Quiz::setname(std::string name) {
+    this->name = name;
 }
 
 void Quiz::readFromFile(std::string filename) {
@@ -64,7 +29,7 @@ void Quiz::readFromFile(std::string filename) {
                     istringstream numbers(line);
                     int number;
                     while(numbers >> number) {
-                        question.answers.at(number-1).correct = true;
+                        question.answers.at(number-1).logicalValue = true;
                     }
                     break;
                 }
@@ -79,15 +44,26 @@ void Quiz::readFromFile(std::string filename) {
     }
 }
 
-Question::Question(const string &text) {
-    this->text = text;
+string Quiz::getName() {
+    return this->name;
 }
 
-Answer::Answer(const string &text) {
-    this->text = text;
+vector<Question> Quiz::getQuestions() {
+    return this->questions;
 }
 
+void Question::print() {
+    cout<<this->question<<endl;
+    cout<<"1. "<<this->answers.at(0).name<<endl;
+    cout<<"2. "<<this->answers.at(1).name<<endl;
+    cout<<"3. "<<this->answers.at(2).name<<endl;
+    cout<<"4. "<<this->answers.at(3).name<<endl;
+}
 
+vector<Answer> Question::getAnswers() {
+    return this->answers;
+}
 
-
-
+bool Answer::isCorrect() {
+    return this->logicalValue;
+}

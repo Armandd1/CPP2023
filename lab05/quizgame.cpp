@@ -1,5 +1,5 @@
-#include "quizgame.h"
-#include "quiz.h"
+#include "Quiz.h"
+#include "Quizgame.h"
 #include <sstream>
 
 void QuizGame::playQuiz(Quiz quiz) const {
@@ -15,7 +15,7 @@ void QuizGame::playQuiz(Quiz quiz) const {
     int score = 0;
 
     // Minden kérdésre válaszolunk
-    for (Question &question : quiz.getQuestions()) {
+    for (Question question : quiz.getQuestions()) {
         // Kiírjuk a kérdést
         question.print();
 

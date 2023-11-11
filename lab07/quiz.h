@@ -1,5 +1,5 @@
 //
-// Created by arman on 2023. 11. 07..
+// Created by arman on 2023. 11. 07.
 //
 
 #ifndef LAB07_QUIZ_H
@@ -8,22 +8,55 @@
 
 #include <string>
 #include <vector>
-#include "question.h"
+
+#include <utility>
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
+class Answer {
+public:
+    string name;
+    bool logicalValue;
+
+    Answer(string answer = NULL);
+
+    bool isCorrect();
+};
+
+class Question {
+public:
+    string question;
+    vector<Answer> answers;
+
+    Question(string question = NULL);
+
+    void print();
+
+    vector<Answer> getAnswers();
+};
+
 class Quiz {
-private:
+public:
     string name;
     vector<Question> questions;
-
 public:
-    Quiz(string name, vector<Question> questions);
-    Quiz();
-    void setName(string name);
+    Quiz(string name = NULL);
+
+    void setname(string name);
+
     void readFromFile(string filename);
+
     string getName();
+
     vector<Question> getQuestions();
+
+    void setName(string);
+
 };
 
 
