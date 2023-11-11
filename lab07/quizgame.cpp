@@ -2,21 +2,17 @@
 #include "Quizgame.h"
 #include <sstream>
 
-void QuizGame::playQuiz(Quiz quiz) const {
+void QuizGame::play() {
     // Bevezető
     std::cout << "Welcome to the Quiz Game!" << std::endl;
-    std::cout << "You are now playing: " << quiz.getName() << std::endl;
+    std::cout << "You are now playing: " << QuizGame::getQuiz().getName() << std::endl;
 
     // Jelenleg beolvasott sor és válasz
     std::string line;
     int answer;
 
-    // Jelenlegi pontszám
-    int score = 0;
-
     // Minden kérdésre válaszolunk
-    for (Question question : quiz.getQuestions()) {
-        // Kiírjuk a kérdést
+    for (Question question : QuizGame::getQuiz().getQuestions()) {
         question.print();
 
         // Beolvasunk egy egész sort, ami tartalmazza a válaszokat
@@ -25,12 +21,10 @@ void QuizGame::playQuiz(Quiz quiz) const {
         std::getline(std::cin, line);
         std::stringstream sstream(line);
 
-        // A válaszokat bitenként eltároljuk
         std::vector<Answer> answers = question.getAnswers();
         int correctAnswer = 0;
         int currentAnswer = 0;
 
-        // A helyes válaszokat bitenként tároljuk el
         for (int i = 0; i < answers.size(); ++i) {
             if (answers[i].isCorrect()) {
                 correctAnswer |= (1 << i);
@@ -55,5 +49,5 @@ void QuizGame::playQuiz(Quiz quiz) const {
 
     // Kiírjuk a végeredményt is
     std::cout << std::endl;
-    std::cout << "Your final score is: " << score << "/" << quiz.getQuestions().size() << std::endl;
+    std::cout << "Your final score is: " << score << "/" << QuizGame::getQuiz().getQuestions().size() << std::endl;
 }
