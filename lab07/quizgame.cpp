@@ -3,19 +3,19 @@
 #include <sstream>
 
 void QuizGame::play() {
-    // Bevezető
     std::cout << "Welcome to the Quiz Game!" << std::endl;
-    std::cout << "You are now playing: " << QuizGame::getQuiz().getName() << std::endl;
 
-    // Jelenleg beolvasott sor és válasz
+    Quiz currentQuiz = QuizGame::getQuiz();
+    currentQuiz.readFromFile(getQuiz().getName());
+
+    std::cout << "You are now playing: " << currentQuiz.getName() << std::endl;
+
     std::string line;
     int answer;
 
-    // Minden kérdésre válaszolunk
-    for (Question question : QuizGame::getQuiz().getQuestions()) {
+    for (Question question: currentQuiz.getQuestions()) {
         question.print();
 
-        // Beolvasunk egy egész sort, ami tartalmazza a válaszokat
         std::cout << "Your answer: " << std::endl;
 
         std::getline(std::cin, line);
@@ -31,14 +31,10 @@ void QuizGame::play() {
             }
         }
 
-        // A játékos által megadott válaszokat is
-        // hasonlóan bitenként tároljuk el
         while (sstream >> answer) {
-            // A válaszok 1-től kezdődnek, de a bitenkénti tárolás 0-tól
             currentAnswer |= (1 << (answer - 1));
         }
 
-        // Összehasonlítjuk a két választ és kiírjuk az eredményt
         if (currentAnswer == correctAnswer) {
             std::cout << "Correct!" << std::endl;
             ++score;
@@ -47,7 +43,7 @@ void QuizGame::play() {
         }
     }
 
-    // Kiírjuk a végeredményt is
     std::cout << std::endl;
-    std::cout << "Your final score is: " << score << "/" << QuizGame::getQuiz().getQuestions().size() << std::endl;
+    std::cout << "Your final score is: " << score << "/" << currentQuiz.getQuestions().size() << std::endl;
 }
+
