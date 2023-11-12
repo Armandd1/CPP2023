@@ -18,6 +18,7 @@ private:
     vector<Book> books;
 
 public:
+
     void addBook(Book book) {
         books.push_back(book);
     }
