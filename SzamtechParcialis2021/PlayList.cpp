@@ -3,3 +3,12 @@
 //
 
 #include "PlayList.h"
+
+bool compareByUploadYear(const Video *a, const Video *b) {
+    // Assuming getUploaded() returns the upload year
+    return a->getUploaded() < b->getUploaded();
+}
+
+void PlayList::sort() {
+    std::sort(list, list + count, compareByUploadYear);
+}

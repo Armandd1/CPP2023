@@ -10,6 +10,7 @@ using namespace std;
 #include <string>
 #include <iostream>
 #include <ostream>
+#include <algorithm>
 #include "Video.h"
 
 
@@ -72,15 +73,18 @@ public:
         }
     }
 
-    void sort() {
-        for (int i = 0; i < count - 1; i++) {
-            for (int j = 0; j < count - i - 1; j++) {
-                if (list[j + 1]->getUploaded() < list[j]->getUploaded()) {
-                    swap(list[j], list[j + 1]);
-                }
-            }
-        }
-    }
+//    void sort3() {
+//        for (int i = 0; i < count - 1; i++) {
+//            for (int j = 0; j < count - i - 1; j++) {
+//                if (list[j + 1]->getUploaded() < list[j]->getUploaded()) {
+//                    swap(list[j], list[j + 1]);
+//                }
+//            }
+//        }
+//    }
+
+    void sort();
+
 
 
     Video *operator[](int index) {
@@ -126,6 +130,5 @@ public:
     }
 
 };
-
 
 #endif //SZAMTECHPARCIALIS2021_PLAYLIST_H
