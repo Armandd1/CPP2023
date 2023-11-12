@@ -20,23 +20,24 @@ class PlayList {
     int count;
 
 public:
-    PlayList(int capacity = 200){
+    PlayList(int capacity = 200) {
         this->capacity = capacity;
         this->count = 0;
-        this->list = new Video*[capacity];
+        this->list = new Video *[capacity];
     }
 
-    PlayList(const PlayList &copy){
+    PlayList(const PlayList &copy) {
         this->title = copy.title;
         this->capacity = copy.capacity;
         this->count = copy.count;
-        this->list = new Video*[copy.capacity];
+        this->list = new Video *[copy.capacity];
         for (int i = 0; i < copy.count; i++) {
-            this->list[i] = new Video(copy.list[i]->getId(), copy.list[i]->getTitle(), copy.list[i]->getLength(), copy.list[i]->getUploader(), copy.list[i]->getUploaded());
+            this->list[i] = new Video(copy.list[i]->getId(), copy.list[i]->getTitle(), copy.list[i]->getLength(),
+                                      copy.list[i]->getUploader(), copy.list[i]->getUploaded());
         }
     }
 
-    PlayList(PlayList &&move){
+    PlayList(PlayList &&move) {
         this->title = move.title;
         this->capacity = move.capacity;
         this->count = move.count;
@@ -94,9 +95,10 @@ public:
         this->title = copy.title;
         this->capacity = copy.capacity;
         this->count = copy.count;
-        this->list = new Video*[copy.capacity];
+        this->list = new Video *[copy.capacity];
         for (int i = 0; i < copy.count; i++) {
-            this->list[i] = new Video(copy.list[i]->getId(), copy.list[i]->getTitle(), copy.list[i]->getLength(), copy.list[i]->getUploader(), copy.list[i]->getUploaded());
+            this->list[i] = new Video(copy.list[i]->getId(), copy.list[i]->getTitle(), copy.list[i]->getLength(),
+                                      copy.list[i]->getUploader(), copy.list[i]->getUploaded());
         }
     }
 
@@ -108,7 +110,7 @@ public:
         move.list = nullptr;
     }
 
-    friend PlayList operator +(const PlayList &a, const PlayList &b) {
+    friend PlayList operator+(const PlayList &a, const PlayList &b) {
         PlayList copy = a;
         for (int i = 0; i < b.count; i++) {
             copy.append(b.list[i]);
@@ -124,8 +126,6 @@ public:
     }
 
 };
-
-
 
 
 #endif //SZAMTECHPARCIALIS2021_PLAYLIST_H
