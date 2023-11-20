@@ -30,7 +30,8 @@ int main() {
     library.addBook(myBook4);
     library.addBook(myBook5);
     library.addBook(myBook6);
-    library.printBooks();
+//    library.printBooks();
+    cout << library;
 
     cout << "Konyvek szama: " << library.countBooksByAuthor("Murakami Haruki") << endl << endl;
 
@@ -42,10 +43,13 @@ int main() {
     }
 
     library.sortBooks();
-    library.printBooks();
+//    library.printBooks();
+    cout << library;
+
 
     library.deleteBook("A koszivu ember fiai");
-    library.printBooks();
+//    library.printBooks();
+    cout << library;
 
     return 0;
 }

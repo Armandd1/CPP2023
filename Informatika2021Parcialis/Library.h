@@ -19,31 +19,37 @@ private:
 
 public:
 
-    void addBook(Book book) {
+    void addBook(const Book& book) {
         books.push_back(book);
     }
 
-    void printBooks() {
-        for (Book book: books) {
-            cout << book;
+//    void printBooks() {
+//        for (Book book: books) {
+//            cout << book;
+//        }
+//        cout<< "------------------------------------" << endl;
+//    }
+
+    friend ostream &operator<<(ostream &os, const Library &library) {
+        for (const Book &book: library.books) {
+            book.print(os);
         }
-        cout<< "------------------------------------" << endl;
+        cout << "------------------------------------" << endl;
+        return os;
     }
 
 
-    const Book &findBook(const string &searchTerm) const {
+    const Book findBook(const string &searchTerm) const {
         for (const Book &book: books) {
             if (book.getTitle().find(searchTerm) != string::npos || book.getAuthor().find(searchTerm) != string::npos) {
                 return book; // Az első egyezést visszaadjuk
             }
         }
-
         // Ha nincs egyezés, kivételt váltunk ki
         throw out_of_range("Book not found!");
-
     }
 
-    int countBooksByAuthor(string author) {
+    int countBooksByAuthor(const string& author) {
         int count = 0;
         for (const Book &book: books) {
             if (book.getAuthor() == author) {
@@ -62,9 +68,9 @@ public:
         });
     }
 
-    void deleteBook(string title){
-        for (int i = 0; i < books.size(); i++){
-            if (books[i].getTitle() == title){
+    void deleteBook(const string& title) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books[i].getTitle() == title) {
                 books.erase(books.begin() + i);
             }
         }

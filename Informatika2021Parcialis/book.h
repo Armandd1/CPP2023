@@ -25,11 +25,11 @@ public:
         this->pages = pages;
     }
 
-    const string &getAuthor() const {
+    const string getAuthor() const {
         return author;
     }
 
-    const string &getTitle() const {
+    const string getTitle() const {
         return title;
     }
 
@@ -42,8 +42,7 @@ public:
     }
 
     void print(ostream &os) const {
-        os << "Author: " << author << "\nTitle: " << title << "\nYear: " << year << "\nPages: " << pages << endl
-           << endl;
+        os << "\nAuthor: " << author << "\nTitle: " << title << "\nYear: " << year << "\nPages: " << pages << endl;
     }
 
     friend ostream &operator<<(std::ostream &os, const Book &book) {
