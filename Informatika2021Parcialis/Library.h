@@ -19,6 +19,19 @@ private:
 
 public:
 
+    Library() {}
+
+    Library(const Library &other) {
+        for (const Book &book : other.books) {
+            books.push_back(Book(book));
+        }
+    }
+
+    Library(Library &&other) noexcept {
+        books = std::move(other.books);
+        other.books.clear();
+    }
+
     void addBook(const Book& book) {
         books.push_back(book);
     }
